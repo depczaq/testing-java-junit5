@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 class IndexControllerTest {
 
@@ -44,5 +46,14 @@ class IndexControllerTest {
     void testTimeoutPreemptivelyAssertion() {
         // kills timeouted thread
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> Thread.sleep(5000));
+    }
+
+    @Test
+    void testAssumptions() {
+        assumeTrue(true, "Assumption should be fulfilled");
+        assumeFalse(false, "Assumption should be fulfilled");
+        assumeTrue(false, "Assumption disabled test execution.");
+
+        fail("This point should not be reached.");
     }
 }
